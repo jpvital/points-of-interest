@@ -6,7 +6,7 @@ export type createPointOfInterestDto = {
     zipCode: string;
     city: string;
     street: string;
-    houseNumber: string;
+    houseNumber: number;
     openingHours: number;
     pumps: Pump[];
     status: Status;

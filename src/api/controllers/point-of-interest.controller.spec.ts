@@ -3,7 +3,7 @@ import { PointOfInterest } from '../../entity/point-of-interest.entity';
 import { PointOfInterestService } from '../services/point-of-interest.service';
 import { PointOfInterestController } from './point-of-interest.controller';
 
-jest.mock('C:\Users\campos\code\points-of-interest\src\api\services\point-of-interest.service.ts');
+jest.mock('../services/point-of-interest.service.ts');
 
 describe('PointOfInterestController', () => {
     let pointOfInterestService: jest.Mocked<PointOfInterestService>;
