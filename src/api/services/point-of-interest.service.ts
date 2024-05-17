@@ -60,7 +60,15 @@ export class PointOfInterestService implements IPointOfInterestService {
                     publicHolidays: { open: '08:00', close: '20:00' }
                 }
             },
-            pumps: []
+            pumps: [
+                // avoiding a cyclical dependency with in memory data declaration
+                //@ts-ignore
+                {
+                    id: 'uuid-1234-5678',
+                    name: 'pump 1',
+                    products: [],
+                }
+            ]
         }
     ];
 

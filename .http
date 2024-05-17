@@ -14,7 +14,11 @@ Content-Type: application/json
     "street": "Furmage St",
     "houseNumber": 1,
     "openingHours": 1,
-    "pumps": []
+    "pumps": [{
+        "id": "uuid-1234-5678",
+        "name": "pump 1",
+        "products": [],
+    }]
 }
 
 PUT http://localhost:3000/api/point-of-interest/uuid-1234-5678

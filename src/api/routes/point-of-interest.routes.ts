@@ -29,13 +29,7 @@ router.get('/point-of-interest', async (req: Request, res: Response) => {
  *   get:
  *     tags:
  *       - Import
- *     description: Get a single of points of interest
- *    parameters:
- *      - name: id
- *        in: path
- *        required: true
- *        type: string
- *        description: The id of the point of interest 
+ *     description: Get a list of points of interest
  *     responses:
  *       201:
  *         description: Success
@@ -47,11 +41,17 @@ router.get('/point-of-interest/:id', async (req: Request, res: Response) => {
 
 /**
  * @swagger
- * /api/point-of-interest:
+ * /api/point-of-interest/{id}:
  *   post:
  *     tags:
  *       - Import
- *     description: Create a new point of interest
+ *     description: Get a point of interest
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         type: string
+ *         description: The id of the point of interest
  *     requestBody:
  *       content:
  *         application/json:
@@ -73,7 +73,7 @@ router.post('/point-of-interest', validatePointOfInterestMiddleWare, async (req:
 
 /**
  * @swagger
- * /api/point-of-interest:
+ * /api/point-of-interest/{id}:
  *   put:
  *     tags:
  *       - Import
