@@ -1,6 +1,6 @@
 import swaggerJsdoc from 'swagger-jsdoc';
 
-const routeFilesExtension = 'js';
+const routeFilesExtension = 'ts';
 
 const options: swaggerJsdoc.Options = {
     definition: {
