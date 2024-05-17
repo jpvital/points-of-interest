@@ -30,7 +30,8 @@ The application will be running on localhost and on port 3000 by default. You ca
 Improvements that could have been implemented with more time:
 
 - Take more advantage of the dependency injection foundation to create abstract interfaces for service classes, so that it is easier to swap between different datastores
-- Do proper validation across endpoints (for example similarly to how we validate the payload in the POST point route, do the same for the PUT request)
+- Validate all of the incoming data (the payloads for interest points+products were significantly large so I didn't have enough time to create a validation schema for the entire set. a smaller schema was made for illustration purposes)
+- Validation across endpoints (for example similarly to how we validate the payload in the POST point route, do the same for the PUT request)
 - Handle more error codes in error handling, e.g 404, 409.
 - setup ESLint to help ensure quality and consistency in the codebase
 - unit tests for service methods
