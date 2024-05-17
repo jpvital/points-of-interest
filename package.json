@@ -2,10 +2,10 @@
   "name": "points-of-interest",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
+  "main": "server.ts",
   "scripts": {
     "test": "jest",
-    "start": "ts-node src/index.ts"
+    "start": "ts-node src/server.ts"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +20,7 @@
     "express": "^4.19.2",
     "joi": "^17.13.1",
     "pg": "^8.11.5",
+    "supertest": "^7.0.0",
     "ts-node": "^10.9.2",
     "typeorm": "^0.3.20",
     "typescript": "^5.4.5"

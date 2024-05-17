@@ -33,7 +33,7 @@ export class PointOfInterestService {
             pumps: []
         }
     ];
-    public async getPointOfInterest(req: any, res: any): Promise<PointOfInterest[]> {
+    public async getPointOfInterest(page: number, limit: number): Promise<PointOfInterest[]> {
         return this.pointsOfInterest;
     }
 

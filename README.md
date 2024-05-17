@@ -13,6 +13,13 @@ To run the application, execute the following from the root directory:
 ```
 npm run start
 ```
+
+To run the unit test suite, execute the following from the root directory:
+
+```
+npm run test
+```
+
 In both cases, the application will be running on localhost and on port 3000 by default. You can access its swagger docs page at http://localhost:3000/api-docs/
 
 ## Libraries used
@@ -26,3 +33,5 @@ Improvements that could have been implemented with more time:
 - Do proper validation across endpoints (for example similarly to how we validate the payload in the POST point route, do the same for the PUT request)
 - Handle more error codes in error handling, e.g 404, 409.
 - setup ESLint to help ensure quality and consistency in the codebase
+- Monitoring: Create a custom logging class, with different levels of logging, to improve monitoring and reduce cluttering.
+- Setup environment variables such as API port, database connection details
