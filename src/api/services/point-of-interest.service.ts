@@ -78,6 +78,8 @@ export class PointOfInterestService implements IPointOfInterestService {
     }
 
     // in database terms the below two methods would perform a JOIN with the pumps table, to fetch the pumps for the point of interest.
+    // to handle pagination, use a combination of OFFSET and LIMIT in the query. LIMIT to determine how many rows of data we want, and
+    // OFFSET to determine how many rows we want to skip over.
     public async getPointOfInterest(page: number, limit: number): Promise<PointOfInterest[]> {
         return this.pointsOfInterest;
     }
