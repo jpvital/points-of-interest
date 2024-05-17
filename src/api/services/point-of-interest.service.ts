@@ -3,25 +3,29 @@
 // Assume that openingHours functions as a database table where the object key is the case number column, and the value is the schedule column.
 
 
+import { OpeningHours } from "../../entity/opening-hours.entity";
 import { PointOfInterest } from "../../entity/point-of-interest.entity";
 import { Status } from "../../types/point-of-interest";
-import { WeeklyHours } from "../../types/schedule";
 import { createPointOfInterestDto } from "../dto/point-of-interest-dto";
 
 export class PointOfInterestService {
 
-    private openingHours: { [key: number]: WeeklyHours } = {
-        1: {
-            monday: { open: '08:00', close: '20:00' },
-            tuesday: { open: '08:00', close: '20:00' },
-            wednesday: { open: '08:00', close: '20:00' },
-            thursday: { open: '08:00', close: '20:00' },
-            friday: { open: '08:00', close: '20:00' },
-            saturday: { open: '08:00', close: '20:00' },
-            sunday: { open: '08:00', close: '20:00' },
-            publicHolidays: { open: '08:00', close: '20:00' }
+    private openingHours: OpeningHours[] = [
+        {
+            id: 'uuid-abcd-1234',
+            hourCase: 1,
+            hours: {
+                monday: { open: '08:00', close: '20:00' },
+                tuesday: { open: '08:00', close: '20:00' },
+                wednesday: { open: '08:00', close: '20:00' },
+                thursday: { open: '08:00', close: '20:00' },
+                friday: { open: '08:00', close: '20:00' },
+                saturday: { open: '08:00', close: '20:00' },
+                sunday: { open: '08:00', close: '20:00' },
+                publicHolidays: { open: '08:00', close: '20:00' }
+            }
         }
-    };
+    ]
 
     private pointsOfInterest: PointOfInterest[] = [
         {
@@ -53,7 +57,7 @@ export class PointOfInterestService {
 
     private fetchOpeningHours(hourCase: number): any {
         // In database terms this would be a join query to get the corresponding schedule to the provided case number.
-        return this.openingHours[hourCase];
+        return this.openingHours.filter((schedule: OpeningHours) => schedule.hourCase === hourCase)[0];
     }
 
     public async getPointOfInterest(page: number, limit: number): Promise<PointOfInterest[]> {
