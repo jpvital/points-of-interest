@@ -10,7 +10,7 @@ export class Pump {
     @Column({ type: 'varchar' })
     name!: string;
 
-    @Column("single-json")
+    @Column("simple-json")
     products!: PumpProduct[];
 
     @ManyToOne(() => PointOfInterest, pointOfInterest => pointOfInterest.pumps)
