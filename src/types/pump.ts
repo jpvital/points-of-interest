@@ -1,4 +1,4 @@
-type PumpProduct = {
+export type PumpProduct = {
     name: string;
     price: {
         currency: string;

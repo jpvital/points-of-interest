@@ -1,12 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-
-type PumpProduct = {
-    name: string;
-    price: {
-        currency: string;
-        value: number;
-    }
-};
+import { PumpProduct } from "../types/pump";
 
 @Entity()
 export class Pump {
