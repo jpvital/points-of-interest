@@ -4,6 +4,8 @@ import { PointOfInterest } from "../../entity/point-of-interest.entity";
 import { Status } from "../../types/point-of-interest";
 import { createPointOfInterestDto } from "../dto/point-of-interest-dto";
 
+// TODO due to time constraints, using memory storage to represent database.
+
 export class PointOfInterestService {
     private pointsOfInterest: PointOfInterest[] = [
         {
