@@ -20,7 +20,7 @@ To run the unit test suite, execute the following from the root directory:
 npm run test
 ```
 
-In both cases, the application will be running on localhost and on port 3000 by default. You can access its swagger docs page at http://localhost:3000/api-docs/
+The application will be running on localhost and on port 3000 by default. You can access its swagger docs page at http://localhost:3000/api-docs/
 
 ## Libraries used
 * ```joi``` - to validate incoming request payloads.
