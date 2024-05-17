@@ -37,3 +37,4 @@ Improvements that could have been implemented with more time:
 - Monitoring: Create a custom logging class, with different levels of logging, to improve monitoring and reduce cluttering.
 - Setup environment variables such as API ports, database connection details
 - Setup an API documentation framework like Swagger to automatically generate API docs page
+- Use caching to retrieve frequently accessed data and reduce the load on our database
