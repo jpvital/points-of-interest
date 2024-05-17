@@ -23,8 +23,6 @@ app.get('/health', (req, res) => {
     res.send('API is up and running');
 });
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
 // swagger documentation
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
