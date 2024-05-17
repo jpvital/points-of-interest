@@ -11,9 +11,11 @@ export class PointOfInterestController {
 
     public getPointOfInterest = async (req: Request, res: Response, next: NextFunction) => {
         try {
+            // handling pagination
             const page = parseInt(req.query.page as string);
             const limit = parseInt(req.query.limit as string);
-            return this.pointOfInterestService.getPointOfInterest(page, limit);
+            const pointsOfService = await this.pointOfInterestService.getPointOfInterest(page, limit);
+            res.status(200).json(pointsOfService);
         } catch (error) {
             next(error);
         }
@@ -22,7 +24,8 @@ export class PointOfInterestController {
     public getPointOfInterestById = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const id = req.params.id;
-            return this.pointOfInterestService.getPointOfInterestById(id);
+            const pointOfService = await this.pointOfInterestService.getPointOfInterestById(id);
+            res.status(200).json(pointOfService);
         } catch (error) {
             next(error);
         }
@@ -31,7 +34,8 @@ export class PointOfInterestController {
     public postPointOfInterest = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const point = req.body;
-            return this.pointOfInterestService.createPointOfInterest(point);
+            const newPointOfservice = await this.pointOfInterestService.createPointOfInterest(point);
+            res.status(201).json(newPointOfservice);
         } catch (error) {
             next(error);
         }
@@ -41,7 +45,8 @@ export class PointOfInterestController {
         try {
             const id = req.params.id;
             const point = req.body;
-            return this.pointOfInterestService.updatePointOfInterest(id, point);
+            const updatedPointOfInterest = await this.pointOfInterestService.updatePointOfInterest(id, point);
+            res.status(200).json(updatedPointOfInterest);
         } catch (error) {
             next(error);
         }
@@ -50,7 +55,8 @@ export class PointOfInterestController {
     public deletePointOfInterest = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const id = req.params.id;
-            return this.pointOfInterestService.deletePointOfInterest(id);
+            await this.pointOfInterestService.deletePointOfInterest(id);
+            res.status(200).json({ message: 'Deleted' });
         } catch (error) {
             next(error);
         }
