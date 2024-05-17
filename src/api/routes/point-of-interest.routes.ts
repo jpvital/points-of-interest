@@ -20,7 +20,7 @@ const router = Router();
  *         description: Success
  */
 router.get('/point-of-interest', async (req: Request, res: Response) => {
-    pointOfInterestController.getPointOfInterest();
+    pointOfInterestController.getPointOfInterest(req, res);
 });
 
 /**
@@ -41,7 +41,7 @@ router.get('/point-of-interest', async (req: Request, res: Response) => {
  *         description: Success
  */
 router.get('/point-of-interest/:id', async (req: Request, res: Response) => {
-    pointOfInterestController.getPointOfInterestById();
+    pointOfInterestController.getPointOfInterestById(req, res);
 });
 
 
@@ -67,7 +67,7 @@ router.get('/point-of-interest/:id', async (req: Request, res: Response) => {
  *          description: Not Found
  */
 router.post('/point-of-interest', validatePointOfInterestMiddleWare, async (req: Request, res: Response) => {
-    pointOfInterestController.postPointOfInterest();
+    pointOfInterestController.postPointOfInterest(req, res);
 });
 
 
@@ -91,7 +91,7 @@ router.post('/point-of-interest', validatePointOfInterestMiddleWare, async (req:
  *        description: Not Found
  */
 router.put('/point-of-interest/:id', validatePointOfInterestMiddleWare, async (req: Request, res: Response) => {
-    pointOfInterestController.putPointOfInterest();
+    pointOfInterestController.putPointOfInterest(req, res);
 });
 
 
@@ -109,7 +109,7 @@ router.put('/point-of-interest/:id', validatePointOfInterestMiddleWare, async (r
  *          description: Not Found
  */
 router.delete('/point-of-interest/:id', async (req: Request, res: Response) => {
-    pointOfInterestController.deletePointOfInterest();
+    pointOfInterestController.deletePointOfInterest(req, res);
 });
 
 export default router;

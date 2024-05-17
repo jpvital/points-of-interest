@@ -1,0 +1,35 @@
+GET http://localhost:3000/api/point-of-interest/
+
+GET http://localhost:3000/api/point-of-interest/uuid-1234-5678
+
+POST http://localhost:3000/api/point-of-interest/
+Content-Type: application/json
+
+{
+    "name": "point 1",
+    "status": "OFFLINE",
+    "country": "England",
+    "zipCode": "sw18",
+    "city": "London",
+    "street": "Furmage St",
+    "houseNumber": 1,
+    "openingHours": 1,
+    "pumps": []
+}
+
+PUT http://localhost:3000/api/point-of-interest/uuid-1234-5678
+Content-Type: application/json
+
+{
+    "name": "point 1 - updated",
+    "status": "OFFLINE",
+    "country": "England",
+    "zipCode": "sw18",
+    "city": "London",
+    "street": "Furmage St",
+    "houseNumber": 1,
+    "openingHours": 1,
+    "pumps": []
+}
+
+DELETE http://localhost:3000/api/point-of-interest/uuid-1234-5678

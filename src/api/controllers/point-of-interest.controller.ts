@@ -15,7 +15,7 @@ export class PointOfInterestController {
             const page = parseInt(req.query.page as string);
             const limit = parseInt(req.query.limit as string);
             const pointsOfService = await this.pointOfInterestService.getPointOfInterest(page, limit);
-            res.status(200).json(pointsOfService);
+            res.status(200).json({ message: "success", data: pointsOfService });
         } catch (error) {
             next(error);
         }
@@ -25,7 +25,7 @@ export class PointOfInterestController {
         try {
             const id = req.params.id;
             const pointOfService = await this.pointOfInterestService.getPointOfInterestById(id);
-            res.status(200).json(pointOfService);
+            res.status(200).json({ message: "success", data: pointOfService });
         } catch (error) {
             next(error);
         }
@@ -35,7 +35,7 @@ export class PointOfInterestController {
         try {
             const point = req.body;
             const newPointOfservice = await this.pointOfInterestService.createPointOfInterest(point);
-            res.status(201).json(newPointOfservice);
+            res.status(201).json({ message: "success", data: newPointOfservice });
         } catch (error) {
             next(error);
         }
@@ -44,9 +44,12 @@ export class PointOfInterestController {
     public putPointOfInterest = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const id = req.params.id;
+
             const point = req.body;
+            delete point.id;
+
             const updatedPointOfInterest = await this.pointOfInterestService.updatePointOfInterest(id, point);
-            res.status(200).json(updatedPointOfInterest);
+            res.status(200).json({ message: "success", data: updatedPointOfInterest });
         } catch (error) {
             next(error);
         }

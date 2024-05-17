@@ -8,7 +8,16 @@ import { PointOfInterest } from "../../entity/point-of-interest.entity";
 import { Status } from "../../types/point-of-interest";
 import { createPointOfInterestDto } from "../dto/point-of-interest-dto";
 
-export class PointOfInterestService {
+export interface IPointOfInterestService {
+    getPointOfInterest(page: number, limit: number): Promise<PointOfInterest[]>;
+    getPointOfInterestById(pointId: string): Promise<PointOfInterest>;
+    createPointOfInterest(point: createPointOfInterestDto): Promise<PointOfInterest>;
+    deletePointOfInterest(pointId: string): Promise<void>;
+    updatePointOfInterest(pointId: string, point: createPointOfInterestDto): Promise<PointOfInterest>;
+
+}
+
+export class PointOfInterestService implements IPointOfInterestService {
 
     private openingHours: OpeningHours[] = [
         {
@@ -29,7 +38,7 @@ export class PointOfInterestService {
 
     private pointsOfInterest: PointOfInterest[] = [
         {
-            id: 'asdavasv',
+            id: 'uuid-1234-5678',
             name: 'point 1',
             status: Status.ONLINE,
             country: 'Germany',
@@ -56,10 +65,11 @@ export class PointOfInterestService {
     ];
 
     private fetchOpeningHours(hourCase: number): any {
-        // In database terms this would be a join query to get the corresponding schedule to the provided case number.
+        // In database terms this would be a JOIN query to get the corresponding schedule to the provided case number.
         return this.openingHours.filter((schedule: OpeningHours) => schedule.hourCase === hourCase)[0];
     }
 
+    // in database terms the below two methods would perform a JOIN with the pumps table, to fetch the pumps for the point of interest.
     public async getPointOfInterest(page: number, limit: number): Promise<PointOfInterest[]> {
         return this.pointsOfInterest;
     }
@@ -73,11 +83,15 @@ export class PointOfInterestService {
 
         const newPoint = { ...point, ...schedule, id: 'new-uuid', status: Status.ONLINE } as PointOfInterest
         this.pointsOfInterest.push(newPoint);
+
+        // in database terms we would insert the point's pumps into the pumps table
+
         return newPoint;
     }
 
     public async deletePointOfInterest(pointId: string): Promise<void> {
         this.pointsOfInterest = this.pointsOfInterest.filter((point: PointOfInterest) => point.id !== pointId);
+        // handle deletion of related pumps in database
     }
 
     public async updatePointOfInterest(pointId: string, point: createPointOfInterestDto): Promise<PointOfInterest> {

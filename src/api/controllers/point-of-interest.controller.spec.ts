@@ -11,26 +11,27 @@ describe('PointOfInterestController', () => {
 
     beforeEach(() => {
         pointOfInterestService = new PointOfInterestService() as jest.Mocked<PointOfInterestService>;
+        pointOfInterestController = new PointOfInterestController(pointOfInterestService);
     });
 
-    describe('getPointsOfInterest', () => {
+    describe('getPointOfInterest', () => {
         it('should call the getPointOfInterest method of the service and respond with status 200', async () => {
-            const req = { page: 2, limit: 3 } as unknown as Request;
+            const req = { query: { page: 2, limit: 3 } } as unknown as Request;
             const res = { status: jest.fn().mockReturnThis(), json: jest.fn() } as unknown as Response;
             const next = jest.fn() as NextFunction;
 
-            const points = [];
+            const points = [] as PointOfInterest[];
 
             pointOfInterestService.getPointOfInterest.mockResolvedValue(points);
             await pointOfInterestController.getPointOfInterest(req, res, next);
 
-            expect(res.status).toHaveBeenCalledWith(201);
-            expect(res.json).toHaveBeenCalledWith(points);
+            expect(res.status).toHaveBeenCalledWith(200);
+            expect(res.json).toHaveBeenCalledWith({ message: "success", data: points });
             expect(pointOfInterestService.getPointOfInterest).toHaveBeenCalledWith(2, 3);
         });
     });
 
-    describe('getPointsOfInterestById', () => {
+    describe('getPointOfInterestById', () => {
         it('should call the getPointOfInterestById method of the service with the correct id', async () => {
             const req = { params: { id: '123' } } as unknown as Request;
             const res = { status: jest.fn().mockReturnThis(), json: jest.fn() } as unknown as Response;
@@ -42,7 +43,7 @@ describe('PointOfInterestController', () => {
             await pointOfInterestController.getPointOfInterestById(req, res, next);
 
             expect(res.status).toHaveBeenCalledWith(200);
-            expect(res.json).toHaveBeenCalledWith(point);
+            expect(res.json).toHaveBeenCalledWith({ message: "success", data: point });
             expect(pointOfInterestService.getPointOfInterestById).toHaveBeenCalledWith('123');
         });
     });
@@ -59,7 +60,7 @@ describe('PointOfInterestController', () => {
             await pointOfInterestController.postPointOfInterest(req, res, next);
 
             expect(res.status).toHaveBeenCalledWith(201);
-            expect(res.json).toHaveBeenCalledWith(point);
+            expect(res.json).toHaveBeenCalledWith({ message: 'success', data: point });
             expect(pointOfInterestService.createPointOfInterest).toHaveBeenCalledWith({});
         });
     });
@@ -76,7 +77,7 @@ describe('PointOfInterestController', () => {
             await pointOfInterestController.putPointOfInterest(req, res, next);
 
             expect(res.status).toHaveBeenCalledWith(200);
-            expect(res.json).toHaveBeenCalledWith(point);
+            expect(res.json).toHaveBeenCalledWith({ message: "success", data: point });
             expect(pointOfInterestService.updatePointOfInterest).toHaveBeenCalledWith('123', {});
         });
     });

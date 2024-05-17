@@ -10,6 +10,9 @@ const pointOfInterestSchema = Joi.object({
     city: Joi.string().required(),
     street: Joi.string().required(),
     houseNumber: Joi.number().required(),
+    status: Joi.string().valid('ONLINE', 'OFFLINE').required(),
+    openingHours: Joi.number().required(),
+    pumps: Joi.array().items()
 });
 
 export const validatePointOfInterest = (pointOfInterest: createPointOfInterestDto) => pointOfInterestSchema.validate(pointOfInterest);
@@ -19,6 +22,7 @@ export const validatePointOfInterestMiddleWare = (req: Request, res: Response, n
     if (error) {
         next(new CustomError(AllowedErrorCode.VALIDATION_ERROR, error.details[0].message))
     }
+    else { next(); }
 }
 
 export default pointOfInterestSchema;
