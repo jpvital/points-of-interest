@@ -22,7 +22,7 @@ npm run test
 
 To test the API manually, please refer to the .http file in the source folder and the requests and payloads in it. Due to time constraints and because a Postgres server was not in place prior to the challenge, I used in memory data for this. Please refer to src/api/service/point-of-interest.service.ts for more details.
 
-The application will be running on localhost and on port 3000 by default. You can access its swagger docs page at http://localhost:3000/api-docs/
+The application will be running on localhost and on port 3000 by default. You can also access its swagger docs page at http://localhost:3000/api-docs/.
 
 ## Libraries used
 * ```joi``` - to validate incoming request payloads.
