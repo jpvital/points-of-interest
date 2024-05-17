@@ -33,5 +33,7 @@ Improvements that could have been implemented with more time:
 - Do proper validation across endpoints (for example similarly to how we validate the payload in the POST point route, do the same for the PUT request)
 - Handle more error codes in error handling, e.g 404, 409.
 - setup ESLint to help ensure quality and consistency in the codebase
+- unit tests for service methods
 - Monitoring: Create a custom logging class, with different levels of logging, to improve monitoring and reduce cluttering.
-- Setup environment variables such as API port, database connection details
+- Setup environment variables such as API ports, database connection details
+- Setup an API documentation framework like Swagger to automatically generate API docs page

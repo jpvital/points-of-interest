@@ -1,8 +1,10 @@
 import { scopePerRequest } from 'awilix-express';
 import express, { Request, Response } from 'express';
 import 'reflect-metadata';
+import swaggerUi from 'swagger-ui-express';
 
 import routes from './api/routes';
+import swaggerDocument from './swagger';
 import container from './utils/context';
 import { CustomError } from './utils/error';
 
@@ -20,6 +22,11 @@ app.use('/api', routes);
 app.get('/health', (req, res) => {
     res.send('API is up and running');
 });
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+// swagger documentation
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // error handling middleware
 app.use((err: CustomError, _req: Request, res: Response) => {
