@@ -1,17 +1,18 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { PumpProduct } from "../types/pump";
+import { PointOfInterest } from "./point-of-interest.entity";
 
-@Entity()
+@Entity('Pump')
 export class Pump {
     @PrimaryGeneratedColumn('uuid')
-    id: string;
+    id!: string;
 
     @Column({ type: 'varchar' })
-    name: string;
+    name!: string;
 
     @Column("single-json")
-    products: PumpProduct[];
+    products!: PumpProduct[];
 
     @ManyToOne(() => PointOfInterest, pointOfInterest => pointOfInterest.pumps)
-    pointOfInterest: PointOfInterest;
+    pointOfInterest!: PointOfInterest;
 }

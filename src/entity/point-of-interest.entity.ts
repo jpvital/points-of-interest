@@ -1,36 +1,37 @@
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Status } from "../types/point-of-interest";
 import { OpeningHours } from "./opening-hours.entity";
+import { Pump } from "./pump.entity";
 
 @Entity()
 export class PointOfInterest {
     @PrimaryGeneratedColumn('uuid')
-    id: string;
+    id!: string;
 
     @Column({ type: 'varchar' })
-    name: string;
+    name!: string;
 
     @Column({ type: 'enum', enum: Status })
-    status: Status;
+    status!: Status;
 
     @Column({ type: 'varchar' })
-    country: string;
+    country!: string;
 
     @Column({ type: 'varchar' })
-    zipCode: string;
+    zipCode!: string;
 
     @Column({ type: 'varchar' })
-    city: string;
+    city!: string;
 
     @Column({ type: 'varchar' })
-    street: string;
+    street!: string;
 
     @Column({ type: 'int' })
-    houseNumber: number;
+    houseNumber!: number;
 
     @ManyToOne(() => OpeningHours, { cascade: true })
-    openingHours: OpeningHours;
+    openingHours!: OpeningHours;
 
-    @OneToMany(() => Pump, pump => pump.pointOfInterest, { cascade: true }))
-    pumps: Pump[];
+    @OneToMany(() => Pump, pump => pump.pointOfInterest, { cascade: true })
+    pumps!: Pump[];
 }

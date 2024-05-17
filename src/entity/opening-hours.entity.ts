@@ -6,12 +6,12 @@ import { WeeklyHours } from "../types/schedule";
 
 @Entity()
 export class OpeningHours {
-    @PrimaryGeneratedColumn('uuid');
-    id: string;
+    @PrimaryGeneratedColumn('uuid')
+    id!: string;
 
     @Column()
-    hourCase: number;
+    hourCase!: number;
 
     @Column('simple-json')
-    hours: WeeklyHours;
+    hours!: WeeklyHours;
 }
