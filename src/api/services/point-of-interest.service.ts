@@ -66,7 +66,19 @@ export class PointOfInterestService implements IPointOfInterestService {
                 {
                     id: 'uuid-1234-5678',
                     name: 'pump 1',
-                    products: [],
+                    products: [{
+                        name: 'Prod 1',
+                        price: {
+                            currency: 'euro',
+                            value: 12,
+                        }
+                    }, {
+                        name: 'Prod 2',
+                        price: {
+                            currency: 'dollar',
+                            value: 12,
+                        }
+                    }],
                 }
             ]
         }
