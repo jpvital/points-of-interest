@@ -90,7 +90,7 @@ router.post('/point-of-interest', validatePointOfInterestMiddleWare, async (req:
  *       404:
  *        description: Not Found
  */
-router.put('/point-of-interest/:id', async (req: Request, res: Response) => {
+router.put('/point-of-interest/:id', validatePointOfInterestMiddleWare, async (req: Request, res: Response) => {
     pointOfInterestController.putPointOfInterest();
 });
 
