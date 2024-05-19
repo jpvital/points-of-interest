@@ -13,7 +13,7 @@
 
 ### Post-Challenge Improvements
 - Set up Postgres connection
-- Dockerised API and dabatase for easier setup
+- Dockerised API and database for easier setup
 - Implemented API Service class so that the API can communicate with a real database instead of in-memory storage
 - Added seeding scripts to populate database with the possible working hour schedules and some point of interest test data
 
@@ -28,7 +28,7 @@ In the root directory, run ```npm install```.
 The application requires ```docker``` and ```docker-compose``` to run.
 
 ## Running the application
-To run the application, execute the following from your terminal: ```./scripts/rebuild.sh```. This wil create a docker container where the application runs alongside a Postgres database.
+To run the application, execute the following from your terminal: ```./scripts/rebuild.sh```. This will create a docker container where the application runs alongside a Postgres database.
 
 To verify that the API started up successfully, access http://localhost:3000/health in your browser. You should see the message ```API is up and running```.
 
