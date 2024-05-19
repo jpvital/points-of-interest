@@ -79,11 +79,12 @@ While convenient, storing column data in json format has some trade-offs such as
 Improvements for this version that could have been implemented with more time:
 
 - setup ESLint to promote code quality and consistency in the codebase
-- unit tests for service and repository methods
+- complete the joi schema for validating incoming payloads
 - PATCH endpoint to toggle point of interest OFFLINE and ONLINE status.
+- unit tests for service and repository methods
 - Handle additional error codes (For example throw a 409 when we try to create a point of interest with a name that already exists).
 - Monitoring: Create a custom logging class, with different levels of logging, to improve monitoring and reduce cluttering.
-- Setup environment variables such as API ports, database connection details
+- Setup environment variables such as API ports, database connection details, logging level
 - Complete Swagger API docs
 - Use caching to retrieve frequently accessed data and reduce the load on our database
 
