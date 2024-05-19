@@ -34,7 +34,7 @@ To verify that the API started up successfully, access http://localhost:3000/hea
 
 To verify that the Database server was created successfully and is operational, you can use a tool like pgAdmin. Use the following credentials to connect to the server:
 
-![Database connection parameters](/image/sample.webp)
+![Database connection parameters](./public/db_params.png)
 
 ## Seeding the application
 Before using the API, it is necessary to populate the database with the possible POI working hour schedules:
