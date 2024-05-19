@@ -1,6 +1,8 @@
-GET http://localhost:3000/api/point-of-interest/
+# Set <offset> to be 0 or multiples of <limit> to get the corresponding page of results
+# if <offset> and <limit> are not provided, the default values are set to 0 and 5 respectively
+GET http://localhost:3000/api/point-of-interest?limit=5&offset=0
 
-GET http://localhost:3000/api/point-of-interest/uuid-1234-5678
+GET http://localhost:3000/api/point-of-interest/4023e2dd-4d53-4f9d-b99c-c78e99317c23
 
 POST http://localhost:3000/api/point-of-interest/
 Content-Type: application/json
@@ -13,27 +15,26 @@ Content-Type: application/json
     "city": "London",
     "street": "Furmage St",
     "houseNumber": 1,
-    "openingHours": 1,
+    "scheduleId": 1,
     "pumps": [{
-        "id": "uuid-1234-5678",
         "name": "pump 1",
         "products": [{
             "name": "Prod 1",
             "price": {
                 "currency": "euro",
-                "value": 12,
+                "value": 12
             }
         }, {
             "name": "Prod 2",
             "price": {
                 "currency": "dollar",
-                "value": 12,
+                "value": 12
             }
-        }],
+        }]
     }]
 }
 
-PUT http://localhost:3000/api/point-of-interest/uuid-1234-5678
+PUT http://localhost:3000/api/point-of-interest/f9a46ef6-381f-4d32-af99-edd511085e71
 Content-Type: application/json
 
 {
@@ -43,9 +44,30 @@ Content-Type: application/json
     "zipCode": "sw18",
     "city": "London",
     "street": "Furmage St",
+    "scheduleId": 1,
     "houseNumber": 1,
-    "openingHours": 1,
-    "pumps": []
-}
+    "pumps": [
+      {
+        "id": "9352b119-6cca-4c21-9e59-549f6800cab4",
+        "name": "pump 1 - updated",
+        "products": [
+          {
+            "name": "Prod 1",
+            "price": {
+              "currency": "euro",
+              "value": 12
+            }
+          },
+          {
+            "name": "Prod 2",
+            "price": {
+              "currency": "dollar",
+              "value": 12
+            }
+          }
+        ]
+      }
+    ]
+  }
 
-DELETE http://localhost:3000/api/point-of-interest/uuid-1234-5678
+DELETE http://localhost:3000/api/point-of-interest/4023e2dd-4d53-4f9d-b99c-c78e99317c23

@@ -1,10 +1,10 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { PumpProduct } from "../types/pump";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
+import { PumpProduct } from "../../types/pump";
 import { PointOfInterest } from "./point-of-interest.entity";
 
 @Entity('Pump')
 export class Pump {
-    @PrimaryGeneratedColumn('uuid')
+    @PrimaryColumn('uuid')
     id!: string;
 
     @Column({ type: 'varchar' })
@@ -14,5 +14,6 @@ export class Pump {
     products!: PumpProduct[];
 
     @ManyToOne(() => PointOfInterest, pointOfInterest => pointOfInterest.pumps)
-    pointOfInterest!: PointOfInterest;
+    @JoinColumn({ name: 'pointOfInterestId' })
+    pointOfInterestId!: string;
 }

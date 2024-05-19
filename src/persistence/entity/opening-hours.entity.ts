@@ -1,15 +1,15 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import { WeeklyHours } from "../types/schedule";
+import { Column, Entity, PrimaryColumn } from "typeorm";
+import { WeeklyHours } from "../../types/schedule";
 
 // For a better understanding of this table, see the definition of WeeklyHours in src/types/schedule.ts.
 // With this implementation we have granularity on how to manage as many schedules as possible.
 
-@Entity()
+@Entity("POISchedule")
 export class OpeningHours {
-    @PrimaryGeneratedColumn('uuid')
+    @PrimaryColumn('uuid')
     id!: string;
 
-    @Column()
+    @Column({ type: 'int', unique: true })
     hourCase!: number;
 
     @Column('simple-json')

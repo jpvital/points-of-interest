@@ -1,5 +1,4 @@
-import { Request, Response, Router } from 'express';
-// TODO middleware to validate request body
+import { NextFunction, Request, Response, Router } from 'express';
 
 import context from '../../utils/context';
 import { validatePointOfInterestMiddleWare } from '../validators/point-of-interest.validator';
@@ -9,18 +8,31 @@ const pointOfInterestController = context.resolve('pointOfInterestController');
 const router = Router();
 
 /**
- * @swagger
- * /api/point-of-interest:
- *   get:
- *     tags:
- *       - Import
- *     description: Get a list of points of interest
- *     responses:
- *       201:
- *         description: Success
- */
-router.get('/point-of-interest', async (req: Request, res: Response) => {
-    pointOfInterestController.getPointOfInterest(req, res);
+* @swagger
+* /api/point-of-interest:
+*   get:
+*     tags:
+*       - Point of Interest
+*     description: Get a list of points of interest
+*     parameters:
+*       - name: offset
+*         in: query
+*         required: false
+*         description: offset tells us which group of <limit> items to return
+*         schema:
+*           type: integer
+*       - name: limit
+*         in: query
+*         required: false
+*         description: The number of items per page
+*         schema:
+*           type: integer
+*     responses:
+*       201:
+*         description: Success
+*/
+router.get('/point-of-interest', async (req: Request, res: Response, next: NextFunction) => {
+    pointOfInterestController.getPointOfInterest(req, res, next);
 });
 
 /**
@@ -28,14 +40,14 @@ router.get('/point-of-interest', async (req: Request, res: Response) => {
  * /api/point-of-interest:
  *   get:
  *     tags:
- *       - Import
- *     description: Get a list of points of interest
+ *       - Point of Interest
+ *     description: Get a single point of interest
  *     responses:
  *       201:
  *         description: Success
  */
-router.get('/point-of-interest/:id', async (req: Request, res: Response) => {
-    pointOfInterestController.getPointOfInterestById(req, res);
+router.get('/point-of-interest/:id', async (req: Request, res: Response, next: NextFunction) => {
+    pointOfInterestController.getPointOfInterestById(req, res, next);
 });
 
 
@@ -44,7 +56,7 @@ router.get('/point-of-interest/:id', async (req: Request, res: Response) => {
  * /api/point-of-interest/{id}:
  *   post:
  *     tags:
- *       - Import
+ *       - Point of Interest
  *     description: Get a point of interest
  *     parameters:
  *       - name: id
@@ -66,8 +78,8 @@ router.get('/point-of-interest/:id', async (req: Request, res: Response) => {
  *       404:
  *          description: Not Found
  */
-router.post('/point-of-interest', validatePointOfInterestMiddleWare, async (req: Request, res: Response) => {
-    pointOfInterestController.postPointOfInterest(req, res);
+router.post('/point-of-interest', validatePointOfInterestMiddleWare, async (req: Request, res: Response, next: NextFunction) => {
+    pointOfInterestController.postPointOfInterest(req, res, next);
 });
 
 
@@ -76,7 +88,7 @@ router.post('/point-of-interest', validatePointOfInterestMiddleWare, async (req:
  * /api/point-of-interest/{id}:
  *   put:
  *     tags:
- *       - Import
+ *       - Point of Interest
  *     description: Update a point of interest
  *     parameters:
  *       - name: id
@@ -90,8 +102,8 @@ router.post('/point-of-interest', validatePointOfInterestMiddleWare, async (req:
  *       404:
  *        description: Not Found
  */
-router.put('/point-of-interest/:id', validatePointOfInterestMiddleWare, async (req: Request, res: Response) => {
-    pointOfInterestController.putPointOfInterest(req, res);
+router.put('/point-of-interest/:id', validatePointOfInterestMiddleWare, async (req: Request, res: Response, next: NextFunction) => {
+    pointOfInterestController.putPointOfInterest(req, res, next);
 });
 
 
@@ -100,7 +112,7 @@ router.put('/point-of-interest/:id', validatePointOfInterestMiddleWare, async (r
  * /api/point-of-interest:
  *   delete:
  *     tags:
- *       - Import
+ *       - Point of Interest
  *     description: delete a point of interest
  *     responses:
  *       200:
@@ -108,8 +120,8 @@ router.put('/point-of-interest/:id', validatePointOfInterestMiddleWare, async (r
  *       404:
  *          description: Not Found
  */
-router.delete('/point-of-interest/:id', async (req: Request, res: Response) => {
-    pointOfInterestController.deletePointOfInterest(req, res);
+router.delete('/point-of-interest/:id', async (req: Request, res: Response, next: NextFunction) => {
+    pointOfInterestController.deletePointOfInterest(req, res, next);
 });
 
 export default router;

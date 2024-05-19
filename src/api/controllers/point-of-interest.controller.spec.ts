@@ -1,22 +1,33 @@
 import { NextFunction, Request, Response } from 'express';
-import { PointOfInterest } from '../../entity/point-of-interest.entity';
-import { PointOfInterestService } from '../services/point-of-interest.service';
+import { PointOfInterest } from '../../persistence/entity/point-of-interest.entity';
+import PostgresPointOfInterestRepository from '../../persistence/repositories/point-of-interest.repository';
+import PointOfInterestService from '../services/point-of-interest.service';
 import { PointOfInterestController } from './point-of-interest.controller';
 
 jest.mock('../services/point-of-interest.service.ts');
+jest.mock('../../persistence/repositories/point-of-interest.repository', () => {
+    return jest.fn().mockImplementation(() => {
+        return {
+            getPointOfInterestById: jest.fn(),
+            // Add other methods as needed
+        };
+    });
+});
 
 describe('PointOfInterestController', () => {
+    let pointOfInterestRepository: jest.Mocked<PostgresPointOfInterestRepository>;
     let pointOfInterestService: jest.Mocked<PointOfInterestService>;
     let pointOfInterestController: PointOfInterestController
 
     beforeEach(() => {
-        pointOfInterestService = new PointOfInterestService() as jest.Mocked<PointOfInterestService>;
+        pointOfInterestRepository = new PostgresPointOfInterestRepository() as jest.Mocked<PostgresPointOfInterestRepository>;
+        pointOfInterestService = new PointOfInterestService(pointOfInterestRepository) as jest.Mocked<PointOfInterestService>;
         pointOfInterestController = new PointOfInterestController(pointOfInterestService);
     });
 
     describe('getPointOfInterest', () => {
         it('should call the getPointOfInterest method of the service and respond with status 200', async () => {
-            const req = { query: { page: 2, limit: 3 } } as unknown as Request;
+            const req = { query: { offset: 2, limit: 3 } } as unknown as Request;
             const res = { status: jest.fn().mockReturnThis(), json: jest.fn() } as unknown as Response;
             const next = jest.fn() as NextFunction;
 
@@ -28,6 +39,21 @@ describe('PointOfInterestController', () => {
             expect(res.status).toHaveBeenCalledWith(200);
             expect(res.json).toHaveBeenCalledWith({ message: "success", data: points });
             expect(pointOfInterestService.getPointOfInterest).toHaveBeenCalledWith(2, 3);
+        });
+
+        it('if limit and offset are not provided, hould call the getPointOfInterest method of the servicewith default values', async () => {
+            const req = { query: {} } as unknown as Request;
+            const res = { status: jest.fn().mockReturnThis(), json: jest.fn() } as unknown as Response;
+            const next = jest.fn() as NextFunction;
+
+            const points = [] as PointOfInterest[];
+
+            pointOfInterestService.getPointOfInterest.mockResolvedValue(points);
+            await pointOfInterestController.getPointOfInterest(req, res, next);
+
+            expect(res.status).toHaveBeenCalledWith(200);
+            expect(res.json).toHaveBeenCalledWith({ message: "success", data: points });
+            expect(pointOfInterestService.getPointOfInterest).toHaveBeenCalledWith(5, 0);
         });
     });
 

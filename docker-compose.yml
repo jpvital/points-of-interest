@@ -1,0 +1,23 @@
+# docker-compose.yml
+
+version: '3'
+services:
+  db:
+    image: postgres:13
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=poi_manager
+  point-of-interest-api:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/src/point-of-interest-api
+    depends_on:
+      - db
+    command: [ "./wait-for-it.sh", "db:5432", "--", "npm", "start" ]
+    environment:
+      - DATABASE_URL=postgres://postgres:password@db:5432/postgres
+      - NODE_ENV=dev

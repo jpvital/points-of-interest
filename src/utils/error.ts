@@ -3,7 +3,7 @@ export enum AllowedErrorCode {
     VALIDATION_ERROR = 400
 }
 
-export class CustomError extends Error {
+export class ApiError extends Error {
     public statusCode: AllowedErrorCode;
     public message: string;
 
@@ -12,6 +12,6 @@ export class CustomError extends Error {
         this.statusCode = code;
         this.message = message;
 
-        Object.setPrototypeOf(this, CustomError.prototype);
+        Object.setPrototypeOf(this, ApiError.prototype);
     }
 }

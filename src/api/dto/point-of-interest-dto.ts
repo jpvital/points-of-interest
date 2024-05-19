@@ -1,13 +1,25 @@
 import { Status } from "../../types/point-of-interest";
-import { Pump } from "../../types/pump";
 
-export type createPointOfInterestDto = {
+export type CreatePumpDto = {
+    id?: string;
+    name: string;
+    products: {
+        name: string;
+        price: {
+            currency: string;
+            value: number;
+        }
+    }[];
+}
+
+export type CreatePointOfInterestDto = {
+    name: string;
     country: string;
     zipCode: string;
     city: string;
     street: string;
     houseNumber: number;
-    openingHours: number;
-    pumps: Pump[];
+    scheduleId: number;
+    pumps: CreatePumpDto[];
     status: Status;
 }

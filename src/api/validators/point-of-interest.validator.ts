@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import Joi from 'joi';
-import { AllowedErrorCode, CustomError } from '../../utils/error';
-import { createPointOfInterestDto } from '../dto/point-of-interest-dto';
+import { AllowedErrorCode, ApiError } from '../../utils/error';
+import { CreatePointOfInterestDto } from '../dto/point-of-interest-dto';
 
 const pointOfInterestSchema = Joi.object({
     name: Joi.string().required(),
@@ -11,16 +11,16 @@ const pointOfInterestSchema = Joi.object({
     street: Joi.string().required(),
     houseNumber: Joi.number().required(),
     status: Joi.string().valid('ONLINE', 'OFFLINE').required(),
-    openingHours: Joi.number().required(),
+    scheduleId: Joi.number().required(),
     pumps: Joi.array().items()
 });
 
-export const validatePointOfInterest = (pointOfInterest: createPointOfInterestDto) => pointOfInterestSchema.validate(pointOfInterest);
+export const validatePointOfInterest = (pointOfInterest: CreatePointOfInterestDto) => pointOfInterestSchema.validate(pointOfInterest);
 
 export const validatePointOfInterestMiddleWare = (req: Request, res: Response, next: NextFunction) => {
     const { error } = validatePointOfInterest(req.body);
     if (error) {
-        next(new CustomError(AllowedErrorCode.VALIDATION_ERROR, error.details[0].message))
+        next(new ApiError(AllowedErrorCode.VALIDATION_ERROR, error.details[0].message))
     }
     else { next(); }
 }

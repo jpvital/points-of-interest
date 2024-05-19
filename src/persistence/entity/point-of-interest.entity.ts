@@ -1,11 +1,11 @@
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Status } from "../types/point-of-interest";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryColumn } from "typeorm";
+import { Status } from "../../types/point-of-interest";
 import { OpeningHours } from "./opening-hours.entity";
 import { Pump } from "./pump.entity";
 
-@Entity()
+@Entity('PointOfInterest')
 export class PointOfInterest {
-    @PrimaryGeneratedColumn('uuid')
+    @PrimaryColumn('uuid')
     id!: string;
 
     @Column({ type: 'varchar' })
@@ -29,9 +29,10 @@ export class PointOfInterest {
     @Column({ type: 'int' })
     houseNumber!: number;
 
-    @ManyToOne(() => OpeningHours, { cascade: true })
-    openingHours!: OpeningHours;
+    @ManyToOne(() => OpeningHours)
+    @JoinColumn({ name: 'scheduleId', referencedColumnName: 'hourCase' })
+    scheduleId!: number;
 
-    @OneToMany(() => Pump, pump => pump.pointOfInterest, { cascade: true })
+    @OneToMany(() => Pump, pump => pump.pointOfInterestId, { cascade: true })
     pumps!: Pump[];
 }
