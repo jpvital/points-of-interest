@@ -1,21 +1,5 @@
 # points-of-interest
-# Node.js REST API
-
-## Challenge Submission
-
-### Completed During Challenge
-- Defined API contracts
-- Set up swagger for API documentation
-- Defined database schema
-- Added basic validation with Joi
-- Example unit test file with Jest
-- Made API functional with in-memory data
-
-### Post-Challenge Improvements
-- Set up Postgres connection
-- Dockerised API and database for easier setup
-- Implemented API Service class so that the API can communicate with a real database instead of in-memory storage
-- Added seeding scripts to populate database with the possible working hour schedules and some point of interest test data
+# Node.js REST API (ExpressJS, Awilix, Postgres)
 
 ## Overview
 
